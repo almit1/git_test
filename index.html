@@ -37,33 +37,40 @@
         let computerScore = 0;
 
         function updateScore(userScore, computerScore) {
+
             document.getElementById("score").textContent = `User: ${userScore} | Computer: ${computerScore}`;
+
         }
 
         function playRound(userInput) {
 
+
             let choices = ["rock", "paper", "scissors"];
             let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-            console.log("User choice: " + userInput);
-            console.log("Computer choice: " + computerChoice);
 
             if (userInput === computerChoice) {
-                console.log("It's a tie!");
+                alert("It's a tie! You both chose " + userInput + ".");
             } else if (
                 (userInput === "rock" && computerChoice === "scissors") ||
                 (userInput === "paper" && computerChoice === "rock") ||
                 (userInput === "scissors" && computerChoice === "paper")
             ) {
-                console.log("You win!");
-                alert("You win!");
                 userScore++;
+                updateScore(userScore, computerScore);
+
+                setTimeout(() => {
+                    alert("You win! Computer chose " + computerChoice + ".");
+                }, 50);
             } else {
-                console.log("Computer wins!");
-                alert("Computer wins!");
                 computerScore++;
+                updateScore(userScore, computerScore);
+
+                setTimeout(() => {
+                    alert("Computer wins! He chose " + computerChoice + ".");
+                }, 50);
             }
 
-            updateScore(userScore, computerScore);
+
             checkWinner();
         }
 
@@ -76,8 +83,10 @@
 
         function checkWinner() {
             if (userScore === 5) {
+
                 alert("Congratulations! You won the game!");
                 resetGame();
+
             } else if (computerScore === 5) {
                 alert("Computer wins the game! Better luck next time!");
                 resetGame();
